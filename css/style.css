@@ -1,1 +1,131 @@
+　　　　 /* --- 基本設定 --- */
+        :root {
+            --bg-color: #fdfcf8;      /* 背景色 */
+            --text-color: #464646;    /* 文字色 */
+            --accent-color: #89c3eb;  /* アクセント色（水色） */
+        }
+
+        body {
+            font-family: 'Shippori Mincho', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 2.0;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- ヘッダー --- */
+        header { padding: 40px 20px; text-align: center; }
+        nav ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 40px; }
+        nav a { text-decoration: none; color: var(--text-color); position: relative; transition: color 0.3s; }
+        nav a:hover { color: var(--accent-color); }
+
+        /* --- メインビジュアル --- */
+        .hero {
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 50px;
+        }
+        .site-title {
+            font-size: 2.5rem;
+            margin: 0;
+            writing-mode: vertical-rl; /* 縦書き */
+            letter-spacing: 0.2em;
+        }
+
+        /* --- コンテンツエリア --- */
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px 80px; }
+        section { margin-bottom: 100px; }
+        h2 { text-align: center; margin-bottom: 50px; font-weight: normal; }
+        h2::after { content: ''; display: block; width: 30px; height: 1px; background-color: var(--accent-color); margin: 15px auto 0; }
+
+        /* --- 小説リスト --- */
+        .novel-list { list-style: none; padding: 0; }
+        .novel-item { margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #eee; }
+        .novel-title { font-size: 1.1em; display: block; text-decoration: none; color: var(--text-color); margin-bottom: 10px; font-weight: bold; }
+        .novel-excerpt { font-size: 0.85em; color: #888; }
+
+        /* --- イラストギャラリー --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: pointer; /* 指マークにする */
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: grayscale(20%);
+            border-radius: 4px;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.03);
+            filter: grayscale(0%);
+        }
+
+        /* --- フッター --- */
+        footer { text-align: center; padding: 40px; font-size: 0.7em; color: #aaa; }
+
+        /* --- スマホ対応 --- */
+        @media (max-width: 600px) {
+            .site-title { writing-mode: horizontal-tb; font-size: 1.8rem; }
+            .hero { height: 30vh; }
+        }
+
+        /* =========================================
+           ▼ ここが修正した拡大表示（モーダル）のCSS ▼
+           ========================================= */
+        .modal {
+            display: none; /* 初期状態は非表示 */
+            position: fixed;
+            z-index: 10000; /* 最前面に */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85); /* 背景の黒さ */
+            
+            /* 中身を中央揃えにするFlexbox設定 */
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* 画面端との隙間 */
+            box-sizing: border-box; /* paddingを含めたサイズ計算 */
+        }
+
+        /* 拡大画像のスタイル（ここを徹底的に修正しました） */
+        #expandedImg {
+            /* 最大サイズを画面の90%に制限 */
+            max-width: 100%;
+            max-height: 90vh;
+            
+            /* アスペクト比を維持して収める */
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 2px solid #fff;
+            animation: zoom 0.3s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0.9); opacity: 0;} 
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 10001;
+        }
 
