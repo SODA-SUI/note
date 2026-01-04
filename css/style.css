@@ -69,6 +69,31 @@
             filter: grayscale(0%);
         }
 
+　　　　　/* --- キャプション（説明文）のデザイン --- */
+       #caption {
+           margin: auto;
+           display: block;
+           width: 80%;
+           max-width: 700px;
+           text-align: center;
+           color: #ccc;       /* 薄いグレー（真っ白すぎない色） */
+           padding: 10px 0;
+           height: 150px;     /* 文字が入る高さを確保 */
+           font-size: 0.9rem; /* 文字サイズ */
+           line-height: 1.6;  /* 行間 */
+           font-family: sans-serif; /* 読みやすいゴシック体にする */
+       }
+
+/* スマホのときは文字を少し小さく */
+@media only screen and (max-width: 700px){
+    #caption {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+}
+
+
+
         /* --- フッター --- */
         footer { text-align: center; padding: 40px; font-size: 0.7em; color: #aaa; }
 
