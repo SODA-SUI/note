@@ -58,13 +58,13 @@
         <h2>Works</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/ART_20200712.jpg" alt="作品1">
+                <img src="images/ART_20200712.jpg" alt="作品1" data-caption="オリジナルキャラの「アリス」。水彩で描きました。">
             </div>
             <div class="gallery-item">
-                <img src="images/ART_20210903.JPG" alt="縦長画像のテスト">
+                <img src="images/ART_20210903.JPG" alt="縦長画像のテスト" data-caption="オリジナルキャラの「アリス」。水彩で描きました。">
             </div>
             <div class="gallery-item">
-                <img src="images/ART_20210707-211202.jpg" alt="縦長画像のテスト">
+                <img src="images/ART_20210707-211202.jpg" alt="縦長画像のテスト" data-caption="オリジナルキャラの「アリス」。水彩で描きました。">
             </div>
         </div>
     </section>
@@ -77,18 +77,24 @@
 
 <div id="imageModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
-    <img id="expandedImg">
+    <img class="modal-content" id="expandedImg">
+    
+    <div id="caption"></div>
 </div>
 
 <script>
     const images = document.querySelectorAll('.gallery-item img');
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('expandedImg');
+    const captionText = document.getElementById("caption"); // ★追加
 
     images.forEach(img => {
         img.addEventListener('click', function() {
-            modal.style.display = "flex"; // ここでFlexboxとして表示
+            modal.style.display = "flex";
             modalImg.src = this.src;
+            
+            // ★追加：クリックされた画像の「data-caption」の中身を、キャプションエリアに入れる
+            captionText.innerHTML = this.dataset.caption; 
         });
     });
 
