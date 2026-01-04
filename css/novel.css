@@ -1,1 +1,89 @@
+        /* --- 共通設定 --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fdfcf8; /* 生成り色 */
+            color: #333;
+            font-family: 'Shippori Mincho', serif;
+        }
+
+        /* --- 画面全体を「横スクロール」にする設定 --- */
+        .book-container {
+            /* 画面の高さに合わせて、横に流れるようにする */
+            height: 100vh;      /* 画面の高さいっぱい */
+            width: 100vw;       /* 画面の幅いっぱい */
+            
+            /* ★ここが縦書きの魔法★ */
+            writing-mode: vertical-rl; 
+            
+            overflow-y: hidden; /* 縦スクロール禁止 */
+            overflow-x: auto;   /* 横スクロール許可 */
+            
+            box-sizing: border-box;
+            padding: 40px 20px; /* 上下の余白 */
+        }
+
+        /* --- 小説の中身 --- */
+        .novel-content {
+            height: 85vh; /* 文字が入る高さ */
+            margin-right: 50px; /* 書き出し位置（右端）の余白 */
+            line-height: 2.2;   /* 行間をゆったりと */
+            letter-spacing: 0.1em; /* 文字間隔 */
+            font-size: 1.1rem;  /* 文字サイズ */
+            text-align: justify;
+        }
+
+        /* タイトルと著者名 */
+        h1 {
+            font-size: 1.8rem;
+            margin-left: 60px; /* 本文との距離 */
+            color: #89c3eb;    /* アクセントカラー */
+        }
+        .author {
+            font-size: 1rem;
+            margin-left: 30px;
+            margin-bottom: 2rem; /* タイトルとの距離 */
+            color: #666;
+        }
+
+/* --- 戻るボタン（丸アイコン・左下配置・SVG対応版） --- */
+        .back-btn {
+            position: fixed;
+            bottom: 30px;  /* 下からの位置 */
+            left: 20px;    /* 左からの位置 */
+            z-index: 100;
+            
+            /* 丸くする設定 */
+            width: 44px;      /* 指で押しやすいサイズ */
+            height: 44px;
+            border-radius: 50%;
+            padding: 0;       /* 余白はゼロにする */
+            
+            /* 中身（矢印）をど真ん中に置く設定 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /* 色とデザイン */
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #89c3eb;
+            color: #89c3eb;   /* 矢印の色 */
+            
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #89c3eb;
+            color: #fff;
+        }
+
+        /* --- スマホ調整 --- */
+        @media (max-width: 600px) {
+            .novel-content {
+                font-size: 1rem;
+                line-height: 1.8;
+                height: 80vh;
+            }
+        }
 
