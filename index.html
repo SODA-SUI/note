@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>スイノオト</title>
+<meta name="description" content="スイノオト - 言葉と、色と、想像と。小説とイラストの保管庫">
+<meta property="og:title" content="スイノオト">
+<meta property="og:description" content="言葉と、色と、想像と。">
+<meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +19,7 @@
 <body class="fade-in">
 
 <header>
-<nav>
+<nav aria-label="メインナビゲーション">
 <ul>
 <li><a href="#about">About</a></li>
 <li><a href="#novel">Novels</a></li>
@@ -24,16 +28,17 @@
 </nav>
 </header>
 
+<main>
 <div class="hero">
 <h1 class="site-title">スイノオト</h1>
-<p style="margin-top:20px; font-size:0.8em; color:#888;">言葉と、色と、想像と。</p>
+<p class="tagline">言葉と、色と、想像と。</p>
 </div>
 
 <div class="container">
 
 <section id="about">
 <h2>About</h2>
-<p style="text-align: center;">
+<p class="about-text">
 ここは<br>
 保管庫と実験場です。<br>
 静かな時間をお過ごしください。
@@ -48,7 +53,7 @@
 <div class="novel-excerpt">雨宿りで立ち寄った喫茶店。そこで出会った不思議な店主との会話が、私の悩みを変えていく...</div>
 </li>
 <li class="novel-item">
-<a href="#" class="novel-title">連載｜魔法使いの弟子（第一章）</a>
+<span class="novel-title coming-soon">連載｜魔法使いの弟子（第一章）<small>（準備中）</small></span>
 <div class="novel-excerpt">ある日突然、異世界に迷い込んだ主人公。手に持っていたのはスマホだけだった...</div>
 </li>
 </ul>
@@ -58,51 +63,30 @@
 <h2>Works</h2>
 <div class="gallery-grid">
 <div class="gallery-item">
-<img src="images/ART_20200712.jpg" alt="作品1">
+<img src="images/ART_20200712.jpg" alt="作品1 - アート作品" loading="lazy">
 </div>
 <div class="gallery-item">
-<img src="images/ART_20210903.JPG" alt="縦長画像のテスト">
+<img src="images/ART_20210903.JPG" alt="作品2 - 縦長イラスト" loading="lazy">
 </div>
 <div class="gallery-item">
-<img src="images/ART_20210707-211202.jpg" alt="縦長画像のテスト">
+<img src="images/ART_20210707-211202.jpg" alt="作品3 - イラスト作品" loading="lazy">
 </div>
 </div>
 </section>
 
 </div>
+</main>
 
 <footer>
 &copy; 2026 スイノオト
 </footer>
 
-<div id="imageModal" class="modal">
-<span class="close" onclick="closeModal()">&times;</span>
-<img id="expandedImg">
+<div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalImage">
+<button class="close" aria-label="画像を閉じる">&times;</button>
+<img id="expandedImg" id="modalImage" alt="">
 </div>
 
-<script>
-const images = document.querySelectorAll('.gallery-item img');
-const modal = document.getElementById('imageModal');
-const modalImg = document.getElementById('expandedImg');
-
-images.forEach(img => {
-img.addEventListener('click', function() {
-modal.style.display = "flex"; // ここでFlexboxとして表示
-modalImg.src = this.src;
-});
-});
-
-function closeModal() {
-modal.style.display = "none";
-}
-
-modal.addEventListener('click', function(e) {
-if (e.target === modal) {
-closeModal();
-}
-});
-</script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
-~
