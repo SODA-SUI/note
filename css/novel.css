@@ -1,89 +1,250 @@
-        /* --- 共通設定 --- */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #fdfcf8; /* 生成り色 */
-            color: #333;
-            font-family: 'Shippori Mincho', serif;
-        }
+/* --- 基本設定 --- */
+:root {
+    --bg-color: #fdfcf8;      /* 生成り色 */
+    --text-color: #333;       /* 文字色 */
+    --accent-color: #89c3eb;  /* アクセント色（水色） */
+}
 
-        /* --- 画面全体を「横スクロール」にする設定 --- */
-        .book-container {
-            /* 画面の高さに合わせて、横に流れるようにする */
-            height: 100vh;      /* 画面の高さいっぱい */
-            width: 100vw;       /* 画面の幅いっぱい */
-            
-            /* ★ここが縦書きの魔法★ */
-            writing-mode: vertical-rl; 
-            
-            overflow-y: hidden; /* 縦スクロール禁止 */
-            overflow-x: auto;   /* 横スクロール許可 */
-            
-            box-sizing: border-box;
-            padding: 40px 20px; /* 上下の余白 */
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        /* --- 小説の中身 --- */
-        .novel-content {
-            height: 85vh; /* 文字が入る高さ */
-            margin-right: 50px; /* 書き出し位置（右端）の余白 */
-            line-height: 2.2;   /* 行間をゆったりと */
-            letter-spacing: 0.1em; /* 文字間隔 */
-            font-size: 1.1rem;  /* 文字サイズ */
-            text-align: justify;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Shippori Mincho', serif;
+    font-display: optional;
+}
 
-        /* タイトルと著者名 */
-        h1 {
-            font-size: 1.8rem;
-            margin-left: 60px; /* 本文との距離 */
-            color: #89c3eb;    /* アクセントカラー */
-        }
-        .author {
-            font-size: 1rem;
-            margin-left: 30px;
-            margin-bottom: 2rem; /* タイトルとの距離 */
-            color: #666;
-        }
+/* --- 画面全体を「横スクロール」にする設定 --- */
+.book-container {
+    height: 100vh;      /* 画面の高さいっぱい */
+    width: 100vw;       /* 画面の幅いっぱい */
+    
+    /* ★ここが縦書きの魔法★ */
+    writing-mode: vertical-rl; 
+    
+    overflow-y: hidden; /* 縦スクロール禁止 */
+    overflow-x: auto;   /* 横スクロール許可 */
+    
+    box-sizing: border-box;
+    padding: 40px 20px; /* 上下の余白 */
+    
+    /* スクロールバーのカスタマイズ（Webkit系ブラウザ） */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+}
+
+/* Webkit系ブラウザのスクロールバー */
+.book-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.book-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.book-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 4px;
+}
+
+.book-container::-webkit-scrollbar-thumb:hover {
+    background-color: #6db0d9;
+}
+
+/* --- 小説の中身 --- */
+.novel-content {
+    height: 85vh; /* 文字が入る高さ */
+    margin-right: 50px; /* 書き出し位置（右端）の余白 */
+    line-height: 2.2;   /* 行間をゆったりと */
+    letter-spacing: 0.1em; /* 文字間隔 */
+    font-size: 1.1rem;  /* 文字サイズ */
+    text-align: justify;
+}
+
+/* 段落の調整 */
+.novel-content p {
+    margin-bottom: 2em;
+}
+
+.novel-content p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* タイトルと著者名 */
+h1 {
+    font-size: 1.8rem;
+    margin-left: 60px; /* 本文との距離 */
+    margin-bottom: 0.5em;
+    color: var(--accent-color);
+    font-weight: normal;
+}
+
+.author {
+    font-size: 1rem;
+    margin-left: 30px;
+    margin-bottom: 3rem; /* タイトルとの距離 */
+    color: #666;
+}
+
+/* 小説の終わり表記 */
+.novel-end {
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: 4em;
+}
 
 /* --- 戻るボタン（丸アイコン・左下配置・SVG対応版） --- */
-        .back-btn {
-            position: fixed;
-            bottom: 30px;  /* 下からの位置 */
-            left: 20px;    /* 左からの位置 */
-            z-index: 100;
-            
-            /* 丸くする設定 */
-            width: 44px;      /* 指で押しやすいサイズ */
-            height: 44px;
-            border-radius: 50%;
-            padding: 0;       /* 余白はゼロにする */
-            
-            /* 中身（矢印）をど真ん中に置く設定 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            /* 色とデザイン */
-            background: rgba(255,255,255,0.9);
-            border: 1px solid #89c3eb;
-            color: #89c3eb;   /* 矢印の色 */
-            
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            transition: all 0.3s;
-        }
+.back-btn {
+    position: fixed;
+    bottom: 30px;  /* 下からの位置 */
+    left: 20px;    /* 左からの位置 */
+    z-index: 100;
+    
+    /* 丸くする設定 */
+    width: 44px;      /* 指で押しやすいサイズ */
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;       /* 余白はゼロにする */
+    
+    /* 中身（矢印）をど真ん中に置く設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* 色とデザイン */
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);   /* 矢印の色 */
+    
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
 
-        .back-btn:hover {
-            background: #89c3eb;
-            color: #fff;
-        }
+.back-btn:hover,
+.back-btn:focus {
+    background: var(--accent-color);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(137, 195, 235, 0.3);
+}
 
-        /* --- スマホ調整 --- */
-        @media (max-width: 600px) {
-            .novel-content {
-                font-size: 1rem;
-                line-height: 1.8;
-                height: 80vh;
-            }
-        }
+.back-btn:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 4px;
+}
 
+/* SVGアイコン */
+.back-btn svg {
+    pointer-events: none;
+}
+
+/* --- タブレット対応 --- */
+@media (min-width: 601px) and (max-width: 900px) {
+    .novel-content {
+        font-size: 1.05rem;
+        line-height: 2.0;
+        height: 82vh;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+        margin-left: 50px;
+    }
+    
+    .author {
+        margin-left: 25px;
+    }
+}
+
+/* --- スマホ対応 --- */
+@media (max-width: 600px) {
+    .book-container {
+        padding: 30px 15px;
+    }
+    
+    .novel-content {
+        font-size: 1rem;
+        line-height: 1.9;
+        height: 80vh;
+        margin-right: 30px;
+        letter-spacing: 0.08em;
+    }
+    
+    h1 {
+        font-size: 1.4rem;
+        margin-left: 40px;
+    }
+    
+    .author {
+        font-size: 0.9rem;
+        margin-left: 20px;
+        margin-bottom: 2.5rem;
+    }
+    
+    .back-btn {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        left: 15px;
+    }
+    
+    .back-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* --- 横向きスマホ対応 --- */
+@media (max-width: 900px) and (orientation: landscape) {
+    .novel-content {
+        height: 70vh;
+        font-size: 0.95rem;
+    }
+    
+    .book-container {
+        padding: 20px 15px;
+    }
+}
+
+/* --- 印刷時の設定 --- */
+@media print {
+    .back-btn {
+        display: none;
+    }
+    
+    .book-container {
+        writing-mode: horizontal-tb;
+        height: auto;
+        overflow: visible;
+    }
+    
+    .novel-content {
+        height: auto;
+        margin: 0;
+        padding: 20mm;
+    }
+    
+    body {
+        background-color: white;
+    }
+}
+
+/* --- ダークモード対応（オプション） --- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #2a2520;
+        --text-color: #e8e6e3;
+        --accent-color: #89c3eb;
+    }
+    
+    .back-btn {
+        background: rgba(42, 37, 32, 0.95);
+        border-color: var(--accent-color);
+    }
+}
