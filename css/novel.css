@@ -248,3 +248,19 @@ h1 {
         border-color: var(--accent-color);
     }
 }
+/* 最後の著者名（下揃え） */
+.author-bottom {
+    margin-top: 4em;
+    margin-left: 0;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: right; /* 縦書きでは下揃えになります */
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+    .author-bottom {
+        font-size: 0.85rem;
+        margin-top: 3em;
+    }
+}
